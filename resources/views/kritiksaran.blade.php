@@ -4,8 +4,8 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="">
             @if ($data->isEmpty())
-                <div class="card">
-                    <div class="col-lg-12 mt-3 mx-3">
+                <div class="card px-3">
+                    <div class="col-lg-12 mt-3">
                         <div class="alert alert-warning" role="alert"><i class='bx bxs-data'></i> Tidak Ada Data Yang Di
                             Tampilkan!</div>
                     </div>
