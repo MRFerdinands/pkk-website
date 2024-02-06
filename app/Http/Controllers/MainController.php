@@ -20,10 +20,6 @@ class MainController extends Controller
     public function rating(Request $request)
     {
         Main::create($request->all());
-        return redirect('/');
-    }
-
-    public function pendaftaranonline(Request $request)
-    {
+        return redirect()->route('home');
     }
 }

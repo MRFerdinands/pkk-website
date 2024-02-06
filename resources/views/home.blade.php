@@ -281,7 +281,7 @@ http://www.tooplate.com/view/2098-health
                             <div class="col-md-6 col-sm-6">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="Email Anda">
+                                    placeholder="Email Anda" required="">
                             </div>
 
                             <div class="col-md-6 col-sm-6">
