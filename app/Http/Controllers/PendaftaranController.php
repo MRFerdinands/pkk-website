@@ -8,6 +8,7 @@ use App\Models\Pendaftaran;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class PendaftaranController extends Controller
@@ -44,6 +45,7 @@ class PendaftaranController extends Controller
                 'id_service_motor' => 'required',
             ]);
 
+            // Validation passed, continue with your code
             $existingCustomer = Customer::where('plat_nomor', $request->plat_nomor_motor)->first();
             if (!$existingCustomer) {
                 Customer::create([
@@ -53,6 +55,7 @@ class PendaftaranController extends Controller
                     'merk_kendaraan' => $request->merk_kendaraan == '' ? '-' : $request->merk_kendaraan,
                 ]);
             }
+
             $pendaftaran = Pendaftaran::create([
                 'plat_nomor' => Str::upper($request->plat_nomor_motor),
                 'nama_pelanggan' => $request->nama_pelanggan == '' ? '-' : $request->nama_pelanggan,
@@ -65,14 +68,11 @@ class PendaftaranController extends Controller
                 'total' => 0,
             ]);
             $pendaftaran->calculateTotal();
-        } catch (QueryException $e) {
-            toastr()->error('Database error: ' . $e->getMessage());
-        } catch (ValidationException $e) {
-            toastr()->error('Plat Nomor Atau Tipe Service tidak boleh kosong!');
-            return redirect()->back()->withInput()->withErrors(['motor' => 'Not Valid']);
+            toastr()->success('Data berhasil ditambahkan!');
+            return redirect('transaksi');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->errors());
         }
-        toastr()->success('Data berhasil di tambah!');
-        return redirect('transaksi');
     }
 
     public function prosesdaftarmobil(Request $request)
@@ -104,13 +104,10 @@ class PendaftaranController extends Controller
                 'total' => 0,
             ]);
             $pendaftaran->calculateTotal();
-        } catch (QueryException $e) {
-            toastr()->error('Database error: ' . $e->getMessage());
-        } catch (ValidationException $e) {
-            toastr()->error('Plat Nomor Atau Tipe Service tidak boleh kosong!');
-            return redirect()->back();
+            toastr()->success('Data berhasil di tambah!');
+            return redirect('transaksi');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->errors());
         }
-        toastr()->success('Data berhasil di tambah!');
-        return redirect('transaksi');
     }
 }

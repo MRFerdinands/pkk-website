@@ -6,15 +6,17 @@
             <div class="nav-align-top mb-4">
                 <ul class="nav nav-tabs nav-fill" role="tablist">
                     <li class="nav-item">
-                        <button type="button" class="nav-link {{ $errors->has('motor') ? '' : 'active' }}" role="tab"
-                            data-bs-toggle="tab" data-bs-target="#navs-pills-justified-home"
+                        <button type="button"
+                            class="nav-link {{ $errors->has('id_service_motor') || $errors->has('plat_nomor_motor') ? '' : 'active' }}"
+                            role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-home"
                             aria-controls="navs-pills-justified-home" aria-selected="true">
                             <i class="tf-icons bx bxs-car"></i> Mobil
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="nav-link {{ $errors->has('motor') ? 'active' : '' }}" role="tab"
-                            data-bs-toggle="tab" data-bs-target="#navs-pills-justified-profile"
+                        <button type="button"
+                            class="nav-link {{ $errors->has('id_service_motor') || $errors->has('plat_nomor_motor') ? 'active' : '' }}"
+                            role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-justified-profile"
                             aria-controls="navs-pills-justified-profile" aria-selected="false">
                             <i class="tf-icons bx bx-cycling"></i> Sepeda Motor
                         </button>
@@ -22,7 +24,7 @@
                 </ul>
                 <div class="tab-content">
                     {{-- Mobil --}}
-                    <div class="tab-pane fade {{ $errors->has('motor') ? '' : 'show active' }}"
+                    <div class="tab-pane fade {{ $errors->has('id_service_motor') || $errors->has('plat_nomor_motor') ? '' : 'show active' }}"
                         id="navs-pills-justified-home" role="tabpanel">
                         {{-- <h5 class="card-header">Form Controls</h5> --}}
                         <div class="">
@@ -33,9 +35,9 @@
                                     <select class="form-select " id="plat_nomor" name="plat_nomor"
                                         aria-label="Default select example">
                                     </select>
-                                    @if ($errors->has('mobil'))
-                                        <div class="alert alert-danger p-2" role="alert">{{ $errors->first('motor') }}
-                                        </div>
+                                    @if ($errors->has('plat_nomor'))
+                                        <div class="alert alert-danger p-2" role="alert">
+                                            {{ $errors->first('plat_nomor') }}</div>
                                     @endif
                                 </div>
                                 <div class="mb-3">
@@ -55,9 +57,10 @@
                                     <select class="form-select " id="selectService" name="id_service"
                                         aria-label="Default select example">
                                     </select>
-                                    @error('id_service')
-                                        <div class="alert alert-danger p-2" role="alert">{{ $message }}</div>
-                                    @enderror
+                                    @if ($errors->has('id_service'))
+                                        <div class="alert alert-danger p-2" role="alert">
+                                            {{ $errors->first('id_service') }}</div>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Biaya Tambahan</label>
@@ -100,7 +103,7 @@
                         </div>
                     </div>
                     {{-- Sepeda Motor --}}
-                    <div class="tab-pane fade {{ $errors->has('motor') ? 'show active' : '' }}"
+                    <div class="tab-pane fade {{ $errors->has('id_service_motor') || $errors->has('plat_nomor_motor') ? 'show active' : '' }}"
                         id="navs-pills-justified-profile" role="tabpanel">
                         {{-- <h5 class="card-header">Form Controls</h5> --}}
                         <div class="">
@@ -111,12 +114,10 @@
                                     <select class="form-select " id="plat_nomor_motor" name="plat_nomor_motor"
                                         aria-label="Default select example">
                                     </select>
-                                    @error('plat_nomor_motor')
-                                        <div class="alert alert-danger p-2" role="alert">{{ $message }}</div>
-                                    @enderror
-
-                                    {{-- <input type="text" class="form-control" name="plat_nomor" id="plat_nomor"
-                                        placeholder="Contoh W 1080 NCK" /> --}}
+                                    @if ($errors->has('plat_nomor_motor'))
+                                        <div class="alert alert-danger p-2" role="alert">
+                                            {{ $errors->first('plat_nomor_motor') }}</div>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Nama Pendaftar <span
@@ -136,9 +137,10 @@
                                     <select class="form-select " id="selectServiceMotor" name="id_service_motor"
                                         aria-label="Default select example">
                                     </select>
-                                    @error('id_service_motor')
-                                        <div class="alert alert-danger p-2" role="alert">{{ $message }}</div>
-                                    @enderror
+                                    @if ($errors->has('id_service_motor'))
+                                        <div class="alert alert-danger p-2" role="alert">
+                                            {{ $errors->first('id_service_motor') }}</div>
+                                    @endif
 
                                 </div>
                                 <div class="mb-3">
