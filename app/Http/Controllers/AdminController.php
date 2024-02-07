@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Database\QueryException;
 use RealRashid\SweetAlert\Facades\Alert;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
+use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
 {
@@ -177,7 +178,7 @@ class AdminController extends Controller
             ]);
         } catch (QueryException $e) {
             toastr()->error('Database error: ' . $e->getMessage());
-            return redirect('user   ');
+            return redirect('user');
         }
         toastr()->success('Data berhasil di update!');
         return redirect('user');
@@ -238,7 +239,14 @@ class AdminController extends Controller
 
     public function kritiksaran()
     {
-        $data = Main::all();
+        $data = Main::orderBy('created_at', 'desc')->get();
+        // $data = Main::all();
         return view('kritiksaran', compact('data'));
+    }
+    public function deleterating($id)
+    {
+        $data = Main::find($id);
+        $data->delete();
+        return redirect()->route('kritiksaran');
     }
 }

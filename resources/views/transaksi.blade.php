@@ -182,7 +182,7 @@
                                             <span class="tf-icons bx bx-edit-alt"> </span>
                                             Edit
                                         </a> --}}
-                                            <a data-id="{{ $row->id }}" data-nama="{{ $row->nama }}"
+                                            <a data-id="{{ $row->id }}" data-nama="{{ $row->nama_pelanggan }}"
                                                 class="btn btn-danger delete text-white">
                                                 <span class="tf-icons bx bx-trash"> </span>
                                                 Delete
@@ -212,7 +212,7 @@
             Swal.fire({
                 title: "Yakin?",
                 icon: "question",
-                text: "Kamu akan menghapus data \"" + nama + "\"",
+                text: "Kamu akan menghapus data Transaksi \"" + nama + "\"",
                 showDenyButton: true,
                 confirmButtonText: "Ya",
                 denyButtonText: `Tidak`

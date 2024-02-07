@@ -44,8 +44,8 @@ Route::get('/editservice/{id}', [AdminController::class, 'editservice'])->name('
 Route::post('/updateservice/{id}', [AdminController::class, 'updateservice'])->name('updateservice')->middleware('auth');
 // Transaksi
 Route::get('/deletetransaksimobil/{id}', [TransaksiController::class, 'deletetransaksimobil'])->name('deletetransaksimobil')->middleware('auth');
-Route::get('/edittransaksimobil/{id}', [TransaksiController::class, 'edittransaksimobil'])->name('edittransaksimobil')->middleware('auth');
-Route::post('/updatetransaksimobil/{id}', [TransaksiController::class, 'updatetransaksimobil'])->name('updatetransaksimobil')->middleware('auth');
+// Route::get('/edittransaksimobil/{id}', [TransaksiController::class, 'edittransaksimobil'])->name('edittransaksimobil')->middleware('auth');
+// Route::post('/updatetransaksimobil/{id}', [TransaksiController::class, 'updatetransaksimobil'])->name('updatetransaksimobil')->middleware('auth');
 // Pendaftaran
 // Mobil
 Route::get('/selectservicemobil', [PendaftaranController::class, 'selectservicemobil'])->name('selectservicemobil.s');
@@ -56,6 +56,8 @@ Route::get('/selectservicemotor', [PendaftaranController::class, 'selectservicem
 Route::get('/selectplatnomormotor', [PendaftaranController::class, 'selectplatnomormotor'])->name('selectplatnomormotor.s');
 Route::post('/prosesdaftarmotor', [PendaftaranController::class, 'prosesdaftarmotor'])->name('prosesdaftarmotor')->middleware('auth');
 Route::get('/editdaftar', [PendaftaranController::class, 'editdaftar'])->name('editdaftar')->middleware('auth');
+// KritikSaran
+Route::get('/deleterating/{id}', [AdminController::class, 'deleterating'])->name('deleterating')->middleware('auth');
 // Login
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/registerproses', [LoginController::class, 'registerproses'])->name('registerproses');

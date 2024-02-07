@@ -221,24 +221,6 @@
                 total = biayatmbh + harga;
                 selectedValueSpan.textContent = formatRupiah(total);
             });
-            $('#plat_nomor').on('change', function() {
-                // harga = parseInt($(this).select2('data')[0].item_harga) || 0;
-                // total = biayatmbh + harga;
-                if (!!$(this).select2('data')[0].merk) {
-                    merk.value = $(this).select2('data')[0].merk;
-                    merk.disabled = true
-                } else {
-                    merk.value = "";
-                    merk.disabled = false
-                }
-                if (!!$(this).select2('data')[0].pelanggan) {
-                    pelanggan.value = $(this).select2('data')[0].pelanggan;
-                    pelanggan.disabled = true
-                } else {
-                    pelanggan.value = "";
-                    pelanggan.disabled = false
-                }
-            });
             $("#plat_nomor").select2({
                 theme: "bootstrap-5",
                 tags: true,
@@ -260,6 +242,24 @@
                             })
                         }
                     }
+                }
+            });
+            $('#plat_nomor').on('change', function() {
+                // harga = parseInt($(this).select2('data')[0].item_harga) || 0;
+                // total = biayatmbh + harga;
+                if (!!$(this).select2('data')[0].merk) {
+                    merk.value = $(this).select2('data')[0].merk;
+                    merk.disabled = false
+                } else {
+                    merk.value = "";
+                    merk.disabled = false
+                }
+                if (!!$(this).select2('data')[0].pelanggan) {
+                    pelanggan.value = $(this).select2('data')[0].pelanggan;
+                    pelanggan.disabled = false
+                } else {
+                    pelanggan.value = "";
+                    pelanggan.disabled = false
                 }
             });
             $("#selectService").select2({

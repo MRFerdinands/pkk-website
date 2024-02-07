@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Main;
 use App\Models\User;
+use App\Models\Pendaftaran;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Termwind\Components\Element;
