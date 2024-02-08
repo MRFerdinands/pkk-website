@@ -62,6 +62,7 @@
         </div> --}}
 
         <!-- List group with Badges & Pills -->
+        {{-- Android --}}
         <div class="d-lg-none">
             @if ($data->isEmpty())
                 <div class="card">
@@ -79,10 +80,10 @@
                                     <span class="fs-5 text-black ">ID: {{ $row->id }}</span>
                                 </div>
                                 <div class="d-flex">
-                                    <a data-id="{{ $row->id }}" data-nama="{{ $row->nama }}"
+                                    {{-- <a data-id="{{ $row->id }}" data-nama="{{ $row->nama }}"
                                         class="btn btn-icon btn-danger ms-2 delete text-white">
                                         <span class="tf-icons bx bx-trash"></span>
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center fs-5">
@@ -108,6 +109,7 @@
         </div>
         <!--/ List group with Badges & Pills -->
 
+        {{-- Desktop --}}
         <div class="card d-none d-lg-block">
             <div class="table-responsive text-nowrap">
                 @if ($data->isEmpty())
