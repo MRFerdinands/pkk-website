@@ -19,14 +19,14 @@
                             <div class="col mb-2">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" id="email" name="email" value="{{ $data->email }}"
-                                    class="form-control" placeholder="Contoh 4000" />
+                                    class="form-control" placeholder="Contoh example@gmail.com" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mb-2">
                                 <label for="password" class="form-label">New Password</label>
                                 <input type="password" id="password" name="password" class="form-control"
-                                    placeholder="Contoh 4000" />
+                                    placeholder="Contoh *****" />
                             </div>
                         </div>
                         <div class="row">
