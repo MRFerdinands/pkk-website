@@ -31,13 +31,15 @@
                             <form action="{{ route('prosesdaftarmobil') }}" method="post">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="plat_nomor" class="form-label">Plat Nomor</label>
-                                    <select class="form-select " id="plat_nomor" name="plat_nomor"
+                                    <label for="plat_nomor" class="form-label">Plat Nomor
+                                    </label>
+                                    <select class="form-select" id="plat_nomor" name="plat_nomor"
                                         aria-label="Default select example">
                                     </select>
                                     @if ($errors->has('plat_nomor'))
-                                        <div class="alert alert-danger p-2" role="alert">
-                                            {{ $errors->first('plat_nomor') }}</div>
+                                        <div class="alert alert-danger p-1 ps-2" role="alert">
+                                            <span class="fw-bold">{{ $errors->first('plat_nomor') }}</span>
+                                        </div>
                                     @endif
                                 </div>
                                 <div class="mb-3">
@@ -58,8 +60,9 @@
                                         aria-label="Default select example">
                                     </select>
                                     @if ($errors->has('id_service'))
-                                        <div class="alert alert-danger p-2" role="alert">
-                                            {{ $errors->first('id_service') }}</div>
+                                        <div class="alert alert-danger p-1 ps-2" role="alert">
+                                            <span class="fw-bold">{{ $errors->first('id_service') }}</span>
+                                        </div>
                                     @endif
                                 </div>
                                 <div class="mb-3">
@@ -115,8 +118,9 @@
                                         aria-label="Default select example">
                                     </select>
                                     @if ($errors->has('plat_nomor_motor'))
-                                        <div class="alert alert-danger p-2" role="alert">
-                                            {{ $errors->first('plat_nomor_motor') }}</div>
+                                        <div class="alert alert-danger p-1 ps-2" role="alert">
+                                            <span class="fw-bold">{{ $errors->first('plat_nomor_motor') }}</span>
+                                        </div>
                                     @endif
                                 </div>
                                 <div class="mb-3">
@@ -138,10 +142,10 @@
                                         aria-label="Default select example">
                                     </select>
                                     @if ($errors->has('id_service_motor'))
-                                        <div class="alert alert-danger p-2" role="alert">
-                                            {{ $errors->first('id_service_motor') }}</div>
+                                        <div class="alert alert-danger p-1 ps-2" role="alert">
+                                            <span class="fw-bold">{{ $errors->first('id_service_motor') }}</span>
+                                        </div>
                                     @endif
-
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Biaya Tambahan</label>

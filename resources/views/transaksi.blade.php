@@ -182,11 +182,13 @@
                                             <span class="tf-icons bx bx-edit-alt"> </span>
                                             Edit
                                         </a> --}}
-                                            <a data-id="{{ $row->id }}" data-nama="{{ $row->nama_pelanggan }}"
-                                                class="btn btn-danger delete text-white">
-                                                <span class="tf-icons bx bx-trash"> </span>
-                                                Delete
-                                            </a>
+                                            @if (Auth::user()->role == 'Admin')
+                                                <a data-id="{{ $row->id }}" data-nama="{{ $row->nama_pelanggan }}"
+                                                    class="btn btn-danger delete text-white">
+                                                    <span class="tf-icons bx bx-trash"> </span>
+                                                    Delete
+                                                </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

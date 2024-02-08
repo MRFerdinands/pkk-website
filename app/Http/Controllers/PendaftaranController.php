@@ -43,6 +43,9 @@ class PendaftaranController extends Controller
             $this->validate($request, [
                 'plat_nomor_motor' => 'required',
                 'id_service_motor' => 'required',
+            ], [
+                'plat_nomor_motor' => 'Plat Nomor tidak boleh kosong!',
+                'id_service_motor' => 'Service tidak boleh kosong!',
             ]);
 
             // Validation passed, continue with your code
@@ -81,6 +84,9 @@ class PendaftaranController extends Controller
             $this->validate($request, [
                 'plat_nomor' => 'required',
                 'id_service' => 'required',
+            ], [
+                'plat_nomor' => 'Plat Nomor tidak boleh kosong!',
+                'id_service' => 'Service tidak boleh kosong!',
             ]);
 
             $existingCustomer = Customer::where('plat_nomor', $request->plat_nomor)->first();
