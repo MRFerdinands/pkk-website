@@ -39,10 +39,12 @@
                                     {{-- <a href="/edittransaksimobil/{{ $row->id }}" class="btn btn-icon btn-primary">
                                         <span class="tf-icons bx bx-edit-alt"></span>
                                     </a> --}}
-                                    <a data-id="{{ $row->id }}" data-nama="{{ $row->nama }}"
-                                        class="btn btn-icon btn-danger ms-2 delete text-white">
-                                        <span class="tf-icons bx bx-trash"></span>
-                                    </a>
+                                    @if (Auth::user()->role == 'Admin')
+                                        <a data-id="{{ $row->id }}" data-nama="{{ $row->nama }}"
+                                            class="btn btn-icon btn-danger ms-2 delete text-white">
+                                            <span class="tf-icons bx bx-trash"></span>
+                                        </a>
+                                    @endif
                                 </div>
                             </li>
                             {{-- <li class="list-group-item d-flex justify-content-between align-items-center fs-5">
