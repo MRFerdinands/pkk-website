@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth', 'access:Admin']], function () {
     Route::get('/deletetransaksimobil/{id}', [TransaksiController::class, 'deletetransaksimobil'])->name('deletetransaksimobil');
     // KritikSaran
     Route::get('/deleterating/{id}', [AdminController::class, 'deleterating'])->name('deleterating');
+    // Customer
+    Route::get('/deletecustomer/{id}', [AdminController::class, 'deletecustomer'])->name('deletecustomer');
 });
 
 // Must Login

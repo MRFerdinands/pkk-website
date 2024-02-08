@@ -116,6 +116,20 @@ class AdminController extends Controller
         return view('customer', compact('data'));
     }
 
+    public function deletecustomer($id)
+    {
+        try {
+            $data = Customer::find($id);
+            $data->delete();
+        } catch (QueryException $e) {
+            toastr()->error('Database error: ' . $e->getMessage());
+            return redirect('customer');
+        }
+        toastr()->success('Data berhasil di hapus!');
+        return view('customer');
+    }
+
+
     public function laporan()
     {
         $data = Pendaftaran::all();

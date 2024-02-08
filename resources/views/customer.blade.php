@@ -80,10 +80,10 @@
                                     <span class="fs-5 text-black ">ID: {{ $row->id }}</span>
                                 </div>
                                 <div class="d-flex">
-                                    {{-- <a data-id="{{ $row->id }}" data-nama="{{ $row->nama }}"
+                                    <a data-id="{{ $row->id }}" data-nama="{{ $row->nama_pelanggan }}"
                                         class="btn btn-icon btn-danger ms-2 delete text-white">
                                         <span class="tf-icons bx bx-trash"></span>
-                                    </a> --}}
+                                    </a>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center fs-5">
@@ -126,6 +126,7 @@
                                 <th>Nama Pelanggan</th>
                                 <th>Kendaraan</th>
                                 <th>Merk Kendaraan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -138,6 +139,19 @@
                                     <td>{{ $row->nama_pelanggan }}</td>
                                     <td>{{ $row->kendaraan }}</td>
                                     <td>{{ $row->merk_kendaraan }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item delete" data-nama="{{ $row->name_pelanggan }}"
+                                                    data-id="{{ $row->id }}"><i class="bx bx-trash me-2"></i>
+                                                    Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -148,3 +162,29 @@
         <!--/ Basic Bootstrap Table -->
     </div>
 @stop
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $('.delete').click(function() {
+            var nama = $(this).attr('data-nama');
+            var id = $(this).attr('data-id');
+            Swal.fire({
+                title: "Yakin?",
+                icon: "question",
+                text: "Kamu akan menghapus data Customer \"" + nama + "\"",
+                showDenyButton: true,
+                confirmButtonText: "Ya",
+                denyButtonText: `Tidak`
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    window.location = "/deletecustomer/" + id;
+                    Swal.fire("Data di hapus!", "", "success");
+                } else if (result.isDenied) {
+                    Swal.fire("Data tidak di hapus!", "", "info");
+                }
+            });
+        });
+    </script>
+@endpush
