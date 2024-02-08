@@ -126,7 +126,7 @@ class AdminController extends Controller
             return redirect('customer');
         }
         toastr()->success('Data berhasil di hapus!');
-        return view('customer');
+        return redirect('customer');
     }
 
 
