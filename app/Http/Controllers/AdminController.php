@@ -28,8 +28,7 @@ class AdminController extends Controller
         Carbon::setLocale('id');
         $today = Carbon::today();
         $tahunIni = $today->year;
-        $totalPendapatanHariini = DB::table('pendaftarans')
-            ->whereDate('created_at', $today)
+        $totalPendapatanHariini = Pendaftaran::whereDate('created_at', $today)
             ->sum('total');
         $totalPendaftaranHariIni = Pendaftaran::whereDate('created_at', $today)->count();
         $namaHari = $today->isoFormat('dddd');
@@ -44,6 +43,8 @@ class AdminController extends Controller
             ->count();
         $totalPendaftaranTahunIni = Pendaftaran::whereYear('created_at', $tahunIni)
             ->count();
+        $totalPendaftaran = Pendaftaran::all()->count();
+        $totalPendapatan = Pendaftaran::all()->sum('total');
 
         // Total Pendaftaran Per Bulan Dalam 1 Tahun
         $registrationsData = Pendaftaran::select(
@@ -91,7 +92,7 @@ class AdminController extends Controller
                 return date('F', mktime(0, 0, 0, $month, 1));
             })->toArray();
         }
-        return view('dashboard', compact('chartData', 'totalPendapatanHariini', 'namaHari', 'namaBulan', 'totalPendaftaranHariIni', 'totalPendapatanBulanIni', 'totalPendaftaranBulanIni', 'totalPendaftaranTahunIni', 'tahunIni', 'totalPendapatanTahunIni'));
+        return view('dashboard', compact('chartData', 'totalPendapatanHariini', 'namaHari', 'namaBulan', 'totalPendaftaranHariIni', 'totalPendapatanBulanIni', 'totalPendaftaranBulanIni', 'totalPendaftaranTahunIni', 'tahunIni', 'totalPendapatanTahunIni', 'totalPendaftaran', 'totalPendapatan'));
     }
 
     public function pendaftaran()
@@ -151,7 +152,31 @@ class AdminController extends Controller
 
     public function tambahuser(Request $request)
     {
+        // try {
+        //     User::create([
+        //         'name' => $request->name,
+        //         'role' => $request->role,
+        //         'email' => $request->email,
+        //         'password' => bcrypt($request->password),
+        //         'remember_token' => Str::random(60),
+        //     ]);
+        // } catch (QueryException $e) {
+        //     toastr()->error('Database error: ' . $e->getMessage());
+        //     return redirect('user');
+        // }
+        // toastr()->success('Data berhasil di tambah!');
+        // return redirect('user');
         try {
+            $this->validate($request, [
+                'name' => 'required',
+                'role' => 'required',
+                'email' => 'required|email',
+            ], [
+                'name' => 'Plat Nomor tidak boleh kosong!',
+                'role' => 'Role tidak boleh kosong!',
+                'email' => 'Email tidak boleh kosong!',
+            ]);
+
             User::create([
                 'name' => $request->name,
                 'role' => $request->role,
@@ -159,12 +184,12 @@ class AdminController extends Controller
                 'password' => bcrypt($request->password),
                 'remember_token' => Str::random(60),
             ]);
-        } catch (QueryException $e) {
-            toastr()->error('Database error: ' . $e->getMessage());
+
+            toastr()->success('Data berhasil ditambahkan!');
             return redirect('user');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->errors());
         }
-        toastr()->success('Data berhasil di tambah!');
-        return redirect('user');
     }
 
     public function deleteuser($id)
@@ -182,7 +207,32 @@ class AdminController extends Controller
 
     public function updateuser(Request $request, $id)
     {
+        // try {
+        //     User::where('id', $id)->update([
+        //         'name' => $request->name,
+        //         'role' => $request->role,
+        //         'email' => $request->email,
+        //         'password' => bcrypt($request->password),
+        //         'remember_token' => Str::random(60),
+        //     ]);
+        // } catch (QueryException $e) {
+        //     toastr()->error('Database error: ' . $e->getMessage());
+        //     return redirect('user');
+        // }
+        // toastr()->success('Data berhasil di update!');
+        // return redirect('user');
+
         try {
+            $this->validate($request, [
+                'name' => 'required',
+                'role' => 'required',
+                'email' => 'required|email',
+            ], [
+                'name' => 'Nama tidak boleh kosong!',
+                'role' => 'Role tidak boleh kosong!',
+                'email' => 'Email tidak boleh kosong!',
+            ]);
+
             User::where('id', $id)->update([
                 'name' => $request->name,
                 'role' => $request->role,
@@ -190,12 +240,12 @@ class AdminController extends Controller
                 'password' => bcrypt($request->password),
                 'remember_token' => Str::random(60),
             ]);
-        } catch (QueryException $e) {
-            toastr()->error('Database error: ' . $e->getMessage());
+
+            toastr()->success('Data berhasil diupdate!');
             return redirect('user');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->errors());
         }
-        toastr()->success('Data berhasil di update!');
-        return redirect('user');
     }
     // End User
 
@@ -239,15 +289,35 @@ class AdminController extends Controller
 
     public function updateservice(Request $request, $id)
     {
-        $data = Service::find($id);
         try {
+            $this->validate($request, [
+                'nama' => 'required',
+                'harga' => 'required',
+                'tipekendaraan' => 'required',
+            ], [
+                'nama' => 'Nama tidak boleh kosong!',
+                'harga' => 'Harga tidak boleh kosong!',
+                'tipekendaraan' => 'Tipe Kendaraan tidak boleh kosong!',
+            ]);
+
+            $data = Service::find($id);
             $data->update($request->all());
-        } catch (QueryException $e) {
-            toastr()->error('Database error: ' . $e->getMessage());
+
+            toastr()->success('Data berhasil diupdate!');
             return redirect('tipeservice');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->errors());
         }
-        toastr()->success('Data berhasil di update!');
-        return redirect()->route('tipeservice');
+
+        // $data = Service::find($id);
+        // try {
+        //     $data->update($request->all());
+        // } catch (QueryException $e) {
+        //     toastr()->error('Database error: ' . $e->getMessage());
+        //     return redirect('tipeservice');
+        // }
+        // toastr()->success('Data berhasil di update!');
+        // return redirect()->route('tipeservice');
     }
     // End Jenis Service
 

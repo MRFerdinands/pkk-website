@@ -11,7 +11,7 @@
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="false">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -27,6 +27,11 @@
                                             <label for="nameWithTitle" class="form-label">Username</label>
                                             <input type="text" id="nameWithTitle" name="name" class="form-control"
                                                 placeholder="Contoh John" />
+                                            @if ($errors->has('name'))
+                                                <div class="alert alert-danger p-1 ps-2" role="alert">
+                                                    <span class="fw-bold">{{ $errors->first('name') }}</span>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row">
@@ -34,6 +39,11 @@
                                             <label for="harga" class="form-label">Email</label>
                                             <input type="text" id="harga" name="email" class="form-control"
                                                 placeholder="Contoh email@email.com" />
+                                            @if ($errors->has('email'))
+                                                <div class="alert alert-danger p-1 ps-2" role="alert">
+                                                    <span class="fw-bold">{{ $errors->first('email') }}</span>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row">
@@ -51,6 +61,11 @@
                                                 <option value="Admin">Admin</option>
                                                 <option value="User">User</option>
                                             </select>
+                                            @if ($errors->has('role'))
+                                                <div class="alert alert-danger p-1 ps-2" role="alert">
+                                                    <span class="fw-bold">{{ $errors->first('role') }}</span>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

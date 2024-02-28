@@ -13,6 +13,11 @@
                                 <label for="nameWithTitle" class="form-label">Username</label>
                                 <input type="text" id="nameWithTitle" name="name" value="{{ $data->name }}"
                                     class="form-control" placeholder="Contoh Full Body" />
+                                @if ($errors->has('name'))
+                                    <div class="alert alert-danger p-1 ps-2 mb-0" role="alert">
+                                        <span class="fw-bold">{{ $errors->first('name') }}</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="row">
@@ -20,6 +25,11 @@
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" id="email" name="email" value="{{ $data->email }}"
                                     class="form-control" placeholder="Contoh example@gmail.com" />
+                                @if ($errors->has('email'))
+                                    <div class="alert alert-danger p-1 ps-2 mb-0" role="alert">
+                                        <span class="fw-bold">{{ $errors->first('email') }}</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="row">
@@ -37,6 +47,11 @@
                                     <option value="Admin">Admin</option>
                                     <option value="User">User</option>
                                 </select>
+                                @if ($errors->has('role'))
+                                    <div class="alert alert-danger p-1 ps-2 mb-0" role="alert">
+                                        <span class="fw-bold">{{ $errors->first('role') }}</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="d-flex gap-3">

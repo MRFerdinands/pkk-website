@@ -25,7 +25,7 @@ class PendaftaranFactory extends Factory
             'biaya_tambahan' => $this->faker->numberBetween(0, 100000),
             'id_service' => \App\Models\Service::all()->random()->id,
             'total' => $this->faker->numberBetween(100000, 1000000),
-            'created_at' => $this->faker->dateTimeBetween('-1 years', 'now')
+            'created_at' => $this->faker->dateTimeBetween('-50 years', 'now')
         ];
     }
 }

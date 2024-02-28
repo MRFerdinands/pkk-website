@@ -9,14 +9,18 @@
                     <form action="{{ route('updateservice', $data->id) }}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col mb-3">
+                            <div class="col mb-2">
                                 <label for="tipekendaraan" class="form-label">Tipe Kendaraan</label>
                                 <select name="tipekendaraan" class="form-select" id="tipekendaraan">
                                     <option selected disabled value="">Pilih Tipe Kendaraan</option>
                                     <option value="Mobil">Mobil</option>
                                     <option value="Motor">Motor</option>
-                                    <option value="Lain">Lain</option>
                                 </select>
+                                @if ($errors->has('tipekendaraan'))
+                                    <div class="alert alert-danger p-1 ps-2 mb-0" role="alert">
+                                        <span class="fw-bold">{{ $errors->first('tipekendaraan') }}</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="row">
@@ -24,6 +28,11 @@
                                 <label for="nameWithTitle" class="form-label">Nama Service</label>
                                 <input type="text" id="nameWithTitle" name="nama" value="{{ $data->nama }}"
                                     class="form-control" placeholder="Contoh Full Body" />
+                                @if ($errors->has('nama'))
+                                    <div class="alert alert-danger p-1 ps-2 mb-0" role="alert">
+                                        <span class="fw-bold">{{ $errors->first('nama') }}</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="row">
@@ -31,6 +40,11 @@
                                 <label for="harga" class="form-label">Harga</label>
                                 <input type="number" id="harga" name="harga" value="{{ $data->harga }}"
                                     class="form-control" placeholder="Contoh 4000" />
+                                @if ($errors->has('harga'))
+                                    <div class="alert alert-danger p-1 ps-2 mb-0" role="alert">
+                                        <span class="fw-bold">{{ $errors->first('harga') }}</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="d-flex gap-3">
