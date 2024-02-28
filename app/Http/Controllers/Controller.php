@@ -11,6 +11,6 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
 
     public function ifest($view) {
-        return view($view);
+        return view('ifest.' . $view);
     }
 }
